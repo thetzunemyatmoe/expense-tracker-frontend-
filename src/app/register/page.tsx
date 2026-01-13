@@ -12,8 +12,8 @@ import { z } from 'zod'
 export const registerFormSchema = z
   .object({
     email: z.email("Enter a valid email"),
-    password: z.string().min(8, "Password must be at least 8 characters").max(50),
-    confirmPassword: z.string().min(7, "Password must be at least 8 characters").max(50),
+    password: z.string().min(7, "Password must be at least 7 characters").max(50),
+    confirmPassword: z.string().min(7, "Password must be at least 7 characters").max(50),
   })
   .superRefine(({password, confirmPassword}, ctx) => {
     if(password !== confirmPassword) {
