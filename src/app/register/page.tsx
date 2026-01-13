@@ -4,13 +4,13 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { email, z } from 'zod'
 
 export const registerFormSchema = z
   .object({
     email: z.email("Enter a valid email"),
     password: z.string().min(8, "Password must be at least 8 characters").max(50),
-    confirmPassword: z.string().min(7).max(50),
+    confirmPassword: z.string().min(7, "Password must be at least 8 characters").max(50),
   })
   .superRefine(({password, confirmPassword}, ctx) => {
     if(password !== confirmPassword) {
@@ -28,6 +28,7 @@ const RegisterPage = () => {
 
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -35,9 +36,14 @@ const RegisterPage = () => {
     },
   })
 
-  const onSubmit = (values: z.infer<typeof registerFormSchema>) => {
-  console.log(values);
-}
+  const onSubmit = async (values: z.infer<typeof registerFormSchema>) => {
+    await fetch("api/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ email: values.email, password: values.password})
+    
+    });
+    console.log(values);
+  }
 
 
   return (
@@ -89,7 +95,12 @@ const RegisterPage = () => {
           )}/>
 
           
-          <Button type="submit">Submit</Button>
+          <Button 
+            type="submit"
+            disabled={form.formState.isSubmitting || !form.formState.isValid}
+            >
+              {form.formState.isSubmitting ? "Processing" : "Register"}
+          </Button>
       </form>
     </Form>
   )
