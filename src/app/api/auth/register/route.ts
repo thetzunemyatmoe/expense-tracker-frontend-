@@ -7,15 +7,19 @@ export async function POST(req: Request) {
 
   const res = await fetch(`${process.env.SPRING_BASE_URL}/api/v1/auth/register`, {
     method: "POST",
-    headers: {"content-type": "application/json"},
+    headers: {
+      "content-type": "application/json"
+    },
     body: JSON.stringify({email, password})
   });
 
   if(!res.ok) {
-    return new NextResponse(await res.text(), {
-      status: res.status
+    const messsage = await res.text();
+    return new NextResponse(messsage, {
+      status: res.status,
     })
   }
+
  
   const data = await res.json();
 

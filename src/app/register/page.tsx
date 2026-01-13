@@ -3,9 +3,12 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { email, z } from 'zod'
+import toast from 'react-hot-toast'
+import { z } from 'zod'
 
+ 
 export const registerFormSchema = z
   .object({
     email: z.email("Enter a valid email"),
@@ -26,6 +29,8 @@ export const registerFormSchema = z
 
 const RegisterPage = () => {
 
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     mode: "onChange",
@@ -37,12 +42,22 @@ const RegisterPage = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof registerFormSchema>) => {
-    await fetch("api/auth/register", {
+    const res = await fetch("api/auth/register", {
       method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
       body: JSON.stringify({ email: values.email, password: values.password})
-    
     });
-    console.log(values);
+
+    if (!res.ok) {
+      toast.error("Error registering")
+      return
+    }
+
+    router.push('/')
+
+
   }
 
 
