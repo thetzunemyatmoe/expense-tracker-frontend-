@@ -8,6 +8,8 @@ import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+
 
 export const loginFormSchema = z
   .object({
@@ -79,11 +81,18 @@ const LoginPage = () => {
           )}/>
 
           <Button
-            type='submit'
-            disabled={form.formState.isSubmitting || !form.formState.isValid}
-          >
-            {form.formState.isSubmitting ? "Processing" : "Login"}
+            type="submit"
+            className="w-full"
+            disabled={form.formState.isSubmitting || !form.formState.isValid}>
+              {form.formState.isSubmitting ? "Processing..." : "Login"}
           </Button>
+
+          <p className="text-center text-sm text-muted-foreground">
+              Don&apos;t have an account?{" "}
+              <Link href="/register" className="font-medium text-foreground underline underline-offset-4">
+                Register
+              </Link>
+          </p>
       </form>
     </Form>
   )

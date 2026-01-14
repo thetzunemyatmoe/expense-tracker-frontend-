@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -110,12 +111,21 @@ const RegisterPage = () => {
           )}/>
 
           
-          <Button 
+  
+
+          <Button
             type="submit"
-            disabled={form.formState.isSubmitting || !form.formState.isValid}
-            >
-              {form.formState.isSubmitting ? "Processing" : "Register"}
+            className="w-full"
+            disabled={form.formState.isSubmitting || !form.formState.isValid}>
+              {form.formState.isSubmitting ? "Processing..." : "Register"}
           </Button>
+
+          <p className="text-center text-sm text-muted-foreground">
+              Already have an account?{" "}
+              <Link href="/login" className="font-medium text-foreground underline underline-offset-4">
+                Login
+              </Link>
+          </p>
       </form>
     </Form>
   )
