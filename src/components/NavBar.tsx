@@ -1,11 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
 
-  const handleLogout = () => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
     console.log("Logoutting")
+
+    await fetch('api/auth/logout', {
+      method: "POST"
+    });
+
+    router.push("/login")
   }
 
   return (
