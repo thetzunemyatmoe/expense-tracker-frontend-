@@ -1,6 +1,5 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import { resolve } from 'path'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -57,6 +56,9 @@ const LoginPage = () => {
 
           render={({field}) => (
             <FormItem>
+              <div className="space-y-2 text-center mb-6">
+                <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
+              </div>
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your email" {...field} type='email'/>

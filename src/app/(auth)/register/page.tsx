@@ -64,6 +64,10 @@ const RegisterPage = () => {
 
   return (
     <Form {...form}>
+      <div className="space-y-2 text-center mb-6">
+        <h1 className="text-2xl font-semibold tracking-tight">Register</h1>
+  
+      </div>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* Email field */}
         <FormField 
@@ -109,10 +113,6 @@ const RegisterPage = () => {
               <FormMessage/>
             </FormItem>
           )}/>
-
-          
-  
-
           <Button
             type="submit"
             className="w-full"

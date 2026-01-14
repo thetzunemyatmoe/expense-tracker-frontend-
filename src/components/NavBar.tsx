@@ -25,9 +25,18 @@ const NavBar = () => {
         <Link href="/" className="text-lg font-semibold">
           Track
         </Link>
+        
 
         {/* Right: Actions */}
         <div className="flex items-center gap-4">
+
+          <Link 
+            href="/expenses"
+            className="text-sm text-gray-600 hover:text-black transition"
+          >
+            Expenses
+          </Link>
+          
           {/* Logout button placeholder */}
           <button
   onClick={handleLogout}
