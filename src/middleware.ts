@@ -11,22 +11,12 @@ export async function middleware(req: NextRequest) {
   const isPublicPage = PUBLIC_PATH.includes(pathname);
 
   if (isAuthenticated && isPublicPage) {
-     const url = req.nextUrl.clone();
-     console.log(`Before modifyting ${url}`) 
-     url.pathname = "/"
-     console.log(`After modifyting ${url}`)
-
-     return NextResponse.redirect(url)
+     return NextResponse.redirect(new URL('/', req.nextUrl))
   }
 
 
   if (!isAuthenticated && !isPublicPage) {
-    const url = req.nextUrl.clone();
-    console.log(`Before modifyting ${url}`) 
-     url.pathname = "/login"
-     console.log(`After modifyting ${url}`)
-
-     return NextResponse.redirect(url)
+    return NextResponse.redirect(new URL('/login', req.nextUrl))
   }
 
   return NextResponse.next();
