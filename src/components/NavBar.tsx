@@ -21,7 +21,7 @@ const NavBar = () => {
       <div className="max-w-5xl mx-auto flex items-center justify-between h-14 px-4">
         
         {/* Left: App Name */}
-        <Link href="/" className="text-lg font-semibold">
+        <Link href="/dashboard" className="text-lg font-semibold">
           Track
         </Link>
         

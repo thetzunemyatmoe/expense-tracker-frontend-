@@ -16,7 +16,7 @@ const LoginPageServer = async () => {
       })
 
       if (res.ok) {
-        redirect("/")
+        redirect("/dashboard")
       }
 
 

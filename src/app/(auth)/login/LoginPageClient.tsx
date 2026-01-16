@@ -43,7 +43,7 @@ const LoginPageClient = () => {
       return
     }
 
-    router.push("/")
+    router.push("/dashboard")
   }
 
   

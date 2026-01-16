@@ -1,26 +1,12 @@
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
-
+import { getExpenseList } from '@/lib/getExpenseList'
+import { ExpenseTabs } from './components/ExpenseTabs';
 
 const ExpenseList = async () => {
-  const token = (await cookies()).get("auth_token")?.value;
-  const res = await fetch(`${process.env.SPRING_BASE_URL}/api/v1/expenses`, {
-    headers: {
-      "Authorization": `Bearer ${token}`
-    },
-    cache: "no-store"
-  })
 
-  if(res.status === 401 || res.status === 403 ) {
-    redirect("/login")
-  }
-
-  const expenseList = await res.json();
-
-  console.log(expenseList)
+  const expenseList = await getExpenseList();
 
   return (
-    <div></div>
+    <ExpenseTabs expenseList={expenseList}/>
   )
 }
 
