@@ -7,15 +7,14 @@ const PUBLIC_PATH = ["/login", "/register"];
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const token = (await cookies()).get('auth_token')?.value;
-  const isAuthenticated = Boolean(token);
   const isPublicPage = PUBLIC_PATH.includes(pathname);
 
-  if (isAuthenticated && isPublicPage) {
-     return NextResponse.redirect(new URL('/', req.nextUrl))
-  }
+  // if (token && isPublicPage) {
+  //    return NextResponse.redirect(new URL('/', req.nextUrl))
+  // }
 
 
-  if (!isAuthenticated && !isPublicPage) {
+  if (!token && !isPublicPage) {
     return NextResponse.redirect(new URL('/login', req.nextUrl))
   }
 

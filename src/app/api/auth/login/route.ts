@@ -38,7 +38,6 @@ export async function POST(req: Request) {
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24
-    // TODO: Match the expire time with the backend
    });
 
    return response;

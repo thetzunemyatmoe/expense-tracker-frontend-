@@ -8,7 +8,6 @@ const NavBar = () => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    console.log("Logoutting")
 
     await fetch('api/auth/logout', {
       method: "POST"

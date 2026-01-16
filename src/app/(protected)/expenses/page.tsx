@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import React from 'react'
+
 
 const ExpenseList = async () => {
   const token = (await cookies()).get("auth_token")?.value;
@@ -12,14 +12,17 @@ const ExpenseList = async () => {
   })
 
   if(res.status === 401 || res.status === 403 ) {
-    return redirect("/login")
+    redirect("/login")
   }
 
   const expenseList = await res.json();
 
+  console.log(expenseList)
+
   return (
-    <div>ExpenseList</div>
+    <div></div>
   )
 }
+
 
 export default ExpenseList
