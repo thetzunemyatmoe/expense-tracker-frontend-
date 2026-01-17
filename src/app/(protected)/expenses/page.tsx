@@ -1,14 +1,8 @@
-import { getExpenseList } from '@/lib/getExpenseList'
-import { ExpenseTabs } from './components/ExpenseTabs';
-import { Expense } from '@/types/expense-types';
+import ExpenseTabs from "./components/ExpenseTabs";
+import { getExpenseList } from "@/lib/getExpenseList";
 
-const ExpenseList = async () => {
+export default async function ExpenseListPage() {
+  const expenseList = await getExpenseList();
 
-  const expenseList : Expense[] = await getExpenseList();
-  return (
-    <ExpenseTabs expenseList={expenseList}/>
-  )
+  return <ExpenseTabs expenseList={expenseList} />;
 }
-
-
-export default ExpenseList
