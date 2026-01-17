@@ -17,10 +17,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
-// ----------------------
-// ZOD SCHEMA (UI ONLY)
-// ----------------------
+
 const addExpenseSchema = z.object({
   title: z.string().min(2, "Enter a valid title"),
   amount: z.preprocess(
@@ -30,20 +30,43 @@ const addExpenseSchema = z.object({
   category: z.string().min(1, "Category is required"),
 });
 
+
 export default function AddExpensePage() {
+  
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof addExpenseSchema>>({
     resolver: zodResolver(addExpenseSchema),
     defaultValues: {
-  title: "",
-  amount: "",   // ← must be string
-  category: ""
+      title: "",
+      amount: "", 
+      category: ""
 },
-
     mode: "onChange",
   });
 
-  const onSubmit = (values: z.infer<typeof addExpenseSchema>) => {
-    console.log("Form submitted:", values); // UI ONLY
+  const onSubmit = async (values: z.infer<typeof addExpenseSchema>) => {
+
+    const res = await fetch(`/api/expense/add`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        title: values.title,
+        amount: values.amount,
+        category: values.category
+      })
+    })
+
+    if (!res.ok) {
+      toast.error("Error adding")
+      return
+    }
+
+    router.push("/expenses")
+
+    
   };
 
   return (
@@ -127,7 +150,7 @@ export default function AddExpensePage() {
 
             {/* Buttons */}
             <div className="flex justify-end gap-3 pt-4">
-              <Button variant="outline" type="button">
+              <Button variant="outline" type="button" onClick={() => router.back()}>
                 Cancel
               </Button>
 
