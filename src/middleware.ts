@@ -11,6 +11,15 @@ export async function middleware(req: NextRequest) {
   const token = (await cookies()).get('auth_token')?.value;
   const isPublicPage = PUBLIC_PATH.includes(pathname);
 
+  if (isPublicPage) {
+    if (token) {
+      const isValid = await checkTokenValid(token);
+      if (isValid) {
+        return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+      }
+    }
+    return NextResponse.next();
+  }
 
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));

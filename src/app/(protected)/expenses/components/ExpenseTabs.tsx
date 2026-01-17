@@ -12,10 +12,15 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import ExpenseTable from "./ExpenseTable"
-import { Expense } from "@/types/expense"
+import { Expense } from "@/types/expense-types"
+
+
 
 
 export function ExpenseTabs({expenseList} : { expenseList: Expense[] }) {
+
+    
+
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
       <Tabs defaultValue="lastweek">

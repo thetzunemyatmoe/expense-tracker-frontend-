@@ -1,6 +1,6 @@
 "use client";
 
-import { Expense } from "@/types/expense";
+import { Expense } from "@/types/expense-types";
 import {
   Table,
   TableBody,
@@ -38,7 +38,11 @@ export function ExpenseTable({ expenses }: {expenses: Expense[]}) {
 
           {expenses.map((expense) => (
             <TableRow key={expense.id}>
-              <TableCell>{expense.addedAt.slice(0, 10)}</TableCell>
+              <TableCell>{expense.addedAt.toLocaleDateString("en-UK", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}</TableCell>
               <TableCell>{expense.title}</TableCell>
               <TableCell>{expense.category}</TableCell>
               <TableCell className="text-right">
