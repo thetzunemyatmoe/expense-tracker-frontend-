@@ -12,6 +12,9 @@ interface ExpenseTabsProps {
 
 export default function ExpenseTabs({ expenseList }: ExpenseTabsProps) {
 
+  
+
+
   const expenseLastWeek = filterBasedOnDate(expenseList, 7);
   const expenseLastMonth = filterBasedOnDate(expenseList, 30);
   const expenseLast3Months = filterBasedOnDate(expenseList, 90);
@@ -42,15 +45,15 @@ export default function ExpenseTabs({ expenseList }: ExpenseTabsProps) {
 
           {/* Each Tab Content */}
           <TabsContent value="week">
-            <ExpenseTable expenses={expenseList} label="Last Week" />
+            <ExpenseTable expenses={expenseLastWeek} label="Last Week" />
           </TabsContent>
 
           <TabsContent value="month">
-            <ExpenseTable expenses={expenseList} label="Last Month" />
+            <ExpenseTable expenses={expenseLastMonth} label="Last Month" />
           </TabsContent>
 
           <TabsContent value="three">
-            <ExpenseTable expenses={expenseList} label="Last 3 Months" />
+            <ExpenseTable expenses={expenseLast3Months} label="Last 3 Months" />
           </TabsContent>
         </Tabs>
       </div>
