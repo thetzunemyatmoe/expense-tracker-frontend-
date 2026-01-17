@@ -13,13 +13,13 @@ import {
 } from "@/components/ui/tabs"
 import ExpenseTable from "./ExpenseTable"
 import { Expense } from "@/types/expense-types"
-
-
-
+import { filterBasedOnDate } from "@/lib/date-filerting"
 
 export function ExpenseTabs({expenseList} : { expenseList: Expense[] }) {
 
-    
+  const expenseLastWeek = filterBasedOnDate(expenseList, 7);
+  const expenseLastMonth = filterBasedOnDate(expenseList, 30);
+  const expenseLast3Months = filterBasedOnDate(expenseList, 90);
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
@@ -35,7 +35,7 @@ export function ExpenseTabs({expenseList} : { expenseList: Expense[] }) {
               <CardTitle>Within last week</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-6">
-              <ExpenseTable expenses={expenseList}/>
+              <ExpenseTable expenses={expenseLastWeek}/>
             </CardContent>
           </Card>
         </TabsContent>
@@ -45,7 +45,7 @@ export function ExpenseTabs({expenseList} : { expenseList: Expense[] }) {
               <CardTitle>Within last month</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-6">
-              <ExpenseTable expenses={expenseList}/>
+              <ExpenseTable expenses={expenseLastMonth}/>
             </CardContent>
           </Card>
         </TabsContent>
@@ -55,7 +55,7 @@ export function ExpenseTabs({expenseList} : { expenseList: Expense[] }) {
               <CardTitle>Within last months</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-6">
-              <ExpenseTable expenses={expenseList}/>
+              <ExpenseTable expenses={expenseLast3Months}/>
             </CardContent>
           </Card>
         </TabsContent>

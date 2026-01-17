@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { toJsDate } from "./toJSDate";
-import { Expense } from "@/types/expense-types";
+import { ExpenseAPI } from "@/types/expense-types";
 
 export async function getExpenseList() {
   const token = (await cookies()).get("auth_token")?.value;
@@ -16,7 +16,7 @@ export async function getExpenseList() {
     redirect("/login")
   }
 
-  const data : Expense[] = await res.json();
+  const data : ExpenseAPI[] = await res.json();
 
   const formattedData = data.map(exp => ({
     ...exp,
