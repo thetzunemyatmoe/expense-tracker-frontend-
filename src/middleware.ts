@@ -1,5 +1,7 @@
+import { ok } from 'assert';
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { checkTokenValid } from "./lib/checkTokenValidity";
 
 
 const PUBLIC_PATH = ["/login", "/register"];
@@ -9,13 +11,14 @@ export async function middleware(req: NextRequest) {
   const token = (await cookies()).get('auth_token')?.value;
   const isPublicPage = PUBLIC_PATH.includes(pathname);
 
-  // if (token && isPublicPage) {
-  //    return NextResponse.redirect(new URL('/', req.nextUrl))
-  // }
 
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  }
 
-  if (!token && !isPublicPage) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl))
+  const isValid = await checkTokenValid(token);
+  if (!isValid) {
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   return NextResponse.next();
