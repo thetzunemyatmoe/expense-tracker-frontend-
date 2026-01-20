@@ -136,7 +136,7 @@ export default function ExpenseTable({ expenses, label }: ExpenseTableProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push(`expenses/${expense.id}/edit`)}>Edit</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => handleDelete(expense.id)} variant="destructive">
                   Delete
