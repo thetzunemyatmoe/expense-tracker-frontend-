@@ -1,5 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import {
   Table,
   TableBody,
@@ -9,7 +17,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Expense } from "@/types/expense-types";
+import { MoreHorizontalIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 // Category → Color mapping
 const categoryColor = {
@@ -30,6 +40,25 @@ interface ExpenseTableProps {
 export default function ExpenseTable({ expenses, label }: ExpenseTableProps) {
 
   const router = useRouter();
+
+
+  const handleDelete = async (id: number) => {
+    const res = await fetch(`/api/expense/delete`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id })
+    })
+
+    if(!res.ok) {
+      toast.error("Error deleting")
+      return;
+    }
+
+    toast.success("Deleted")
+    router.refresh();
+  }
   return (
   <div className="mt-4 w-full">
     
@@ -99,8 +128,22 @@ export default function ExpenseTable({ expenses, label }: ExpenseTableProps) {
 
               {/* Future actions */}
               <TableCell className="text-right">
-                <div className="opacity-50 text-sm">...</div>
-              </TableCell>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="size-8">
+                  <MoreHorizontalIcon />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleDelete(expense.id)} variant="destructive">
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -64,6 +64,7 @@ export default function AddExpensePage() {
       return
     }
 
+    toast.success("Expense Added")
     router.push("/expenses")
 
     
