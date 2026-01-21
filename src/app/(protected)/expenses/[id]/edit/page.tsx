@@ -1,3 +1,8 @@
+
+import { getExpenseById } from "@/lib/getExpenseList";
+import { Expense } from "@/types/expense-types";
+import ExpenseEditClientPage from "./component/ExpenseEditClientPage";
+
 interface ExpenseEditPageProps {
   params: Promise<{ id: string }>
 }
@@ -5,9 +10,12 @@ interface ExpenseEditPageProps {
 const ExpenseEditPage = async ({ params }: ExpenseEditPageProps) => {
 
   const { id } = await params;
-  console.log("Expense ID:",id);
 
-  return <div>ExpenseEditPage</div>;
+  const data : Expense = await getExpenseById(Number(id));
+
+
+  return <ExpenseEditClientPage expense={data}/>
+
 };
 
 export default ExpenseEditPage;

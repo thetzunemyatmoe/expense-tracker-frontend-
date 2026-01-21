@@ -1,6 +1,5 @@
-
+"use client"
 import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -15,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ExpenseFormValues, ExpenseSchema } from "@/lib/validators/expense.schema";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface ExpensFormProps {
   initialValues: ExpenseFormValues,
@@ -24,6 +25,8 @@ interface ExpensFormProps {
 
 
 const ExpenseForm = ({initialValues, onSubmit, buttonLabel}: ExpensFormProps ) => {
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof ExpenseSchema>>({
     resolver: zodResolver(ExpenseSchema),

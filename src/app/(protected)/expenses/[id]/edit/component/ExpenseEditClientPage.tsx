@@ -1,21 +1,28 @@
-"use client";
+"use client"
 
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { ExpenseSchema } from "@/lib/validators/expense.schema";
 import ExpenseForm from "@/app/(protected)/expenses/components/ExpenseForm";
 
-export default function AddExpensePage() {
+import { Expense } from "@/types/expense-types";
+import { useRouter } from "next/navigation";
+
+interface ExpenseEditClientPageProps {
+  expense: Expense
+}
+
+const ExpenseEditClientPage = ({ expense } : ExpenseEditClientPageProps) => {
   
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof ExpenseSchema>) => {
-    const res = await fetch(`/api/expense/add`, {
+    const res = await fetch(`/api/expense/edit`, {
       method: "POST",
       headers: {
         "content-type": "application/json"
       },
       body: JSON.stringify({
+        id: expense.id,
         title: values.title,
         amount: values.amount,
         category: values.category
@@ -23,16 +30,21 @@ export default function AddExpensePage() {
     })
 
     if (!res.ok) {
-      toast.error("Error adding")
+      toast.error("Error updating")
       return
     }
-    toast.success("Expense Added")
+
+    toast.success("Update successful")
     router.push("/expenses")
   };
 
-  return <ExpenseForm 
-    initialValues={{title: "", amount: 0, category: ""}}
+  return (
+    <ExpenseForm 
+    initialValues={{title: expense.title, amount: expense.amount, category: expense.category}}
     onSubmit={onSubmit}
-    buttonLabel="Add Expense"
+    buttonLabel="Save Changes"
   />
+  )
 }
+
+export default ExpenseEditClientPage
