@@ -2,6 +2,8 @@ import { filterBasedOnDate } from '@/lib/date-filerting';
 import { getExpenseList } from '@/lib/fetch-expense';
 import React from 'react'
 import MonthlyTotalSpent from './components/MonthlyTotalSpent';
+import TotalTransactions from './components/TotalTransactions';
+import HighestExpese from './components/HighestExpese';
 
 const DashboardPage = async () => {
 
@@ -24,22 +26,13 @@ const DashboardPage = async () => {
   {/* ⭐ Summary Cards */}
   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
     {/* Total Spent */}
-    <div className="border rounded-lg p-4 shadow-sm bg-white">
-      <MonthlyTotalSpent/>
-    </div>
+    <MonthlyTotalSpent expenseList={expenseLastMonth}/>
 
     {/* Transactions Count */}
-    <div className="border rounded-lg p-4 shadow-sm bg-white">
-      <p className="text-sm text-neutral-500">Transactions</p>
-      <h2 className="text-2xl font-bold mt-1">0</h2>
-    </div>
-
+    <TotalTransactions expenseList={expenseList}/>
+    
     {/* Highest Expense */}
-    <div className="border rounded-lg p-4 shadow-sm bg-white">
-      <p className="text-sm text-neutral-500">Highest Expense</p>
-      <h2 className="text-2xl font-bold mt-1">£0.00</h2>
-      <p className="text-xs text-neutral-400">—</p>
-    </div>
+    <HighestExpese expenseList={expenseList}/>
   </div>
 
   {/* ⭐ Charts Row */}
