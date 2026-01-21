@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { ExpenseSchema } from "@/lib/validators/expense.schema";
+import { ExpenseSchema } from "@/lib/schemas/expense.schema";
 import ExpenseForm from "@/app/(protected)/expenses/components/ExpenseForm";
 
 export default function AddExpensePage() {
@@ -13,12 +13,12 @@ export default function AddExpensePage() {
     const res = await fetch(`/api/expense/add`, {
       method: "POST",
       headers: {
-        "content-type": "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         title: values.title,
         amount: values.amount,
-        category: values.category
+        preCategory: values.preCategory
       })
     })
 
@@ -31,7 +31,7 @@ export default function AddExpensePage() {
   };
 
   return <ExpenseForm 
-    initialValues={{title: "", amount: 0, category: ""}}
+    initialValues={{title: "", amount: 0, preCategory: undefined}}
     onSubmit={onSubmit}
     buttonLabel="Add Expense"
   />

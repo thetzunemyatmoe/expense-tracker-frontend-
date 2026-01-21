@@ -1,6 +1,6 @@
 import { Expense } from "@/types/expense-types";
 import ExpenseTabs from "./components/ExpenseTabs";
-import { getExpenseList } from "@/lib/getExpenseList";
+import { getExpenseList } from "@/lib/fetch-expense";
 
 export default async function ExpenseListPage() {
   const expenseList = await getExpenseList();

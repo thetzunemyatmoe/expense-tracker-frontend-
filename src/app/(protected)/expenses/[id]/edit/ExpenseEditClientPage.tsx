@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import toast from "react-hot-toast";
-import { ExpenseSchema } from "@/lib/validators/expense.schema";
+import { ExpenseSchema } from "@/lib/schemas/expense.schema";
 import ExpenseForm from "@/app/(protected)/expenses/components/ExpenseForm";
 
 import { Expense } from "@/types/expense-types";
@@ -25,7 +25,7 @@ const ExpenseEditClientPage = ({ expense } : ExpenseEditClientPageProps) => {
         id: expense.id,
         title: values.title,
         amount: values.amount,
-        category: values.category
+        preCategory: values.preCategory
       })
     })
 
@@ -40,7 +40,7 @@ const ExpenseEditClientPage = ({ expense } : ExpenseEditClientPageProps) => {
 
   return (
     <ExpenseForm 
-    initialValues={{title: expense.title, amount: expense.amount, category: expense.category}}
+    initialValues={{title: expense.title, amount: expense.amount, preCategory: expense.category}}
     onSubmit={onSubmit}
     buttonLabel="Save Changes"
   />

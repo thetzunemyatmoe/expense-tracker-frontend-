@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ExpenseFormValues, ExpenseSchema } from "@/lib/validators/expense.schema";
+import { ExpenseFormValues, ExpenseSchema } from "@/lib/schemas/expense.schema";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
@@ -22,6 +22,17 @@ interface ExpensFormProps {
   onSubmit: (values: ExpenseFormValues, id?: number) => Promise<void> | void,
   buttonLabel: string;
 }
+
+type Category =
+  | "GROCERIES"
+  | "LEISURE"
+  | "ELECTRONICS"
+  | "UTILITIES"
+  | "CLOTHING"
+  | "HEALTH"
+  | "OTHERS"
+  | "AUTO";
+
 
 
 const ExpenseForm = ({initialValues, onSubmit, buttonLabel}: ExpensFormProps ) => {
@@ -33,7 +44,7 @@ const ExpenseForm = ({initialValues, onSubmit, buttonLabel}: ExpensFormProps ) =
     defaultValues: {
       title: initialValues.title,
       amount: initialValues.amount, 
-      category: initialValues.category
+      preCategory: initialValues.preCategory
 },
     mode: "onChange",
   });
@@ -91,31 +102,42 @@ const ExpenseForm = ({initialValues, onSubmit, buttonLabel}: ExpensFormProps ) =
 
             {/* Category */}
             <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Choose a category" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="GROCERIES">Groceries</SelectItem>
-                      <SelectItem value="LEISURE">Leisure</SelectItem>
-                      <SelectItem value="ELECTRONICS">Electronics</SelectItem>
-                      <SelectItem value="UTILITIES">Utilities</SelectItem>
-                      <SelectItem value="CLOTHING">Clothing</SelectItem>
-                      <SelectItem value="HEALTH">Health</SelectItem>
-                      <SelectItem value="OTHERS">Others</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+  control={form.control}
+  name="preCategory"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Category</FormLabel>
+
+      <Select
+        value={field.value ?? "AUTO"}
+        onValueChange={(value) => {
+          field.onChange(value === "AUTO" ? undefined : value);
+        }}
+      >
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Auto (AI will decide)" />
+          </SelectTrigger>
+        </FormControl>
+
+        <SelectContent>
+          <SelectItem value="AUTO">Auto (AI)</SelectItem>
+          <SelectItem value="GROCERIES">Groceries</SelectItem>
+          <SelectItem value="LEISURE">Leisure</SelectItem>
+          <SelectItem value="ELECTRONICS">Electronics</SelectItem>
+          <SelectItem value="UTILITIES">Utilities</SelectItem>
+          <SelectItem value="CLOTHING">Clothing</SelectItem>
+          <SelectItem value="HEALTH">Health</SelectItem>
+          <SelectItem value="OTHERS">Others</SelectItem>
+        </SelectContent>
+      </Select>
+
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
+
 
         
 

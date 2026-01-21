@@ -5,7 +5,17 @@ export const ExpenseSchema = z.object({
   (val) => val === "" ? undefined : Number(val),
   z.number().positive("Amount must be greater than 0")
 ),
-  category: z.string().min(1, "Category is required"),
+  preCategory: z
+  .enum([
+    "GROCERIES",
+    "LEISURE",
+    "ELECTRONICS",
+    "UTILITIES",
+    "CLOTHING",
+    "HEALTH",
+    "OTHERS",
+  ])
+  .optional(),
 });
 
 export type ExpenseFormValues = z.infer<typeof ExpenseSchema>;
