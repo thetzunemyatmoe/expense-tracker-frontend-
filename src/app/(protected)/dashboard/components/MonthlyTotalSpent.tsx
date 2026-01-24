@@ -6,8 +6,6 @@ interface MonthlyTotalSpentProps {
 }
 const MonthlyTotalSpent = ({expenseList}: MonthlyTotalSpentProps) => {
 
-  console.log(expenseList)
-
   const total_amount = expenseList.map(expense => expense.amount).reduce(function (x, y) {
     return x + y
   }, 0);
