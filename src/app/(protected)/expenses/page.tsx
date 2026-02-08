@@ -1,4 +1,3 @@
-import { Expense } from "@/types/expense-types";
 import ExpenseTabs from "./components/ExpenseTabs";
 import { getExpenseList } from "@/lib/fetch-expense";
 

@@ -154,3 +154,5 @@ export default function ExpenseTable({ expenses, label }: ExpenseTableProps) {
 );
 
 }
+
+
