@@ -6,6 +6,7 @@ import TotalTransactions from './components/TotalTransactions';
 import HighestExpese from './components/HighestExpese';
 import { generateInsight } from '@/lib/ai';
 import { Expense } from '@/types/expense-types';
+import CategoryBreakdown from './components/CategoryBreakdown';
 
 const DashboardPage = async () => {
 
@@ -14,91 +15,10 @@ const DashboardPage = async () => {
   const expenseList = await getExpenseList();
   const expenseLastMonth = filterBasedOnDate(expenseList, 30);
 
-  const list_of_expense: Expense[] = [
-  {
-    id: 1,
-    title: "Tesco Groceries",
-    amount: 45.3,
-    category: "GROCERIES",
-    addedAt: new Date("2026-01-03T18:42:00Z"),
-    userId: 101
-  },
-  {
-    id: 2,
-    title: "Pret A Manger",
-    amount: 6.8,
-    category: "FOOD_OUT",
-    addedAt: new Date("2026-01-04T08:15:00Z"),
-    userId: 101
-  },
-  {
-    id: 3,
-    title: "Uber Ride",
-    amount: 14.5,
-    category: "TRANSPORT",
-    addedAt: new Date("2026-01-04T22:10:00Z"),
-    userId: 101
-  },
-  {
-    id: 4,
-    title: "Netflix Subscription",
-    amount: 15.99,
-    category: "ENTERTAINMENT",
-    addedAt: new Date("2026-01-05T00:02:00Z"),
-    userId: 101
-  },
-  {
-    id: 5,
-    title: "Gym Membership",
-    amount: 39.99,
-    category: "HEALTH",
-    addedAt: new Date("2026-01-05T07:30:00Z"),
-    userId: 101
-  },
-  {
-    id: 6,
-    title: "Amazon Electronics",
-    amount: 289.99,
-    category: "ELECTRONICS",
-    addedAt: new Date("2026-01-06T14:05:00Z"),
-    userId: 101
-  },
-  {
-    id: 7,
-    title: "Starbucks",
-    amount: 4.75,
-    category: "FOOD_OUT",
-    addedAt: new Date("2026-01-06T09:10:00Z"),
-    userId: 101
-  },
-  {
-    id: 8,
-    title: "Train Ticket",
-    amount: 62.0,
-    category: "TRANSPORT",
-    addedAt: new Date("2026-01-07T17:55:00Z"),
-    userId: 101
-  },
-  {
-    id: 9,
-    title: "Zara Clothing",
-    amount: 120.0,
-    category: "SHOPPING",
-    addedAt: new Date("2026-01-08T16:20:00Z"),
-    userId: 101
-  },
-  {
-    id: 10,
-    title: "Dinner with Friends",
-    amount: 78.5,
-    category: "FOOD_OUT",
-    addedAt: new Date("2026-01-09T21:40:00Z"),
-    userId: 101
-  }
-]
 
+  // TODO : Uncomment
+  // const insight = await generateInsight(list_of_expense);
 
-  const insight = generateInsight(list_of_expense);
 
   
 
@@ -124,12 +44,7 @@ const DashboardPage = async () => {
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
     {/* Category Breakdown Chart */}
-    <div className="border rounded-lg p-4 shadow-sm bg-white h-[350px]">
-      <h3 className="text-lg font-semibold mb-2">Category Breakdown</h3>
-      <div className="flex items-center justify-center h-full text-neutral-400">
-        (Pie chart goes here)
-      </div>
-    </div>
+    <CategoryBreakdown expenseList={expenseList}/>
 
     <div className="border rounded-lg p-4 shadow-sm bg-white h-[350px]">
       <h3 className="text-lg font-semibold mb-2">Spending Trend (Last 30 Days)</h3>

@@ -54,8 +54,9 @@ Make the summary concise (2–3 sentences max).`
  })
 
  const data = response.output_text
+ const insight = JSON.parse(data)
 
- console.log(data)
+ return insight
 
 } 
 
