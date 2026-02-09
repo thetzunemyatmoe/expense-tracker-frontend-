@@ -7,6 +7,7 @@ import { generateInsight } from '@/lib/ai';
 import CategoryBreakdown from './components/CategoryBreakdown';
 import { Expense } from '@/types/expense-types';
 import SpendingInsight from './components/SpendingInsight';
+import SpendingTrend from './components/SpendingTrend';
 
 const DashboardPage = async () => {
 
@@ -16,7 +17,6 @@ const DashboardPage = async () => {
   const expenseLastMonth = filterBasedOnDate(expenseList, 30);
 
 
-  // TODO : Uncomment
   const list_of_expense: Expense[] = [
   {
     id: 1,
@@ -98,6 +98,87 @@ const DashboardPage = async () => {
     addedAt: new Date("2026-01-30"),
     userId: 1,
   },
+  {
+  id: 11,
+  title: "Lunch",
+  amount: 12.5,
+  category: "LEISURE",
+  addedAt: new Date("2026-02-03"),
+  userId: 1,
+},
+{
+  id: 12,
+  title: "Bus Ticket",
+  amount: 3.2,
+  category: "TRANSPORT",
+  addedAt: new Date("2026-02-03"),
+  userId: 1,
+},
+{
+  id: 13,
+  title: "Groceries",
+  amount: 36.8,
+  category: "GROCERIES",
+  addedAt: new Date("2026-02-04"),
+  userId: 1,
+},
+{
+  id: 14,
+  title: "Coffee",
+  amount: 4.1,
+  category: "LEISURE",
+  addedAt: new Date("2026-02-05"),
+  userId: 1,
+},
+{
+  id: 15,
+  title: "Gym Membership",
+  amount: 29.99,
+  category: "HEALTH",
+  addedAt: new Date("2026-02-05"),
+  userId: 1,
+},
+{
+  id: 16,
+  title: "Takeaway Dinner",
+  amount: 21.75,
+  category: "LEISURE",
+  addedAt: new Date("2026-02-06"),
+  userId: 1,
+},
+{
+  id: 17,
+  title: "Electricity Top-up",
+  amount: 15.0,
+  category: "UTILITIES",
+  addedAt: new Date("2026-02-07"),
+  userId: 1,
+},
+{
+  id: 18,
+  title: "Groceries (Weekend)",
+  amount: 52.4,
+  category: "GROCERIES",
+  addedAt: new Date("2026-02-08"),
+  userId: 1,
+},
+{
+  id: 19,
+  title: "Movie Rental",
+  amount: 6.99,
+  category: "LEISURE",
+  addedAt: new Date("2026-02-08"),
+  userId: 1,
+},
+{
+  id: 20,
+  title: "Breakfast & Coffee",
+  amount: 7.6,
+  category: "LEISURE",
+  addedAt: new Date("2026-02-09"),
+  userId: 1,
+},
+
 ];
 
   // AI
@@ -120,63 +201,23 @@ const DashboardPage = async () => {
     <div className="flex flex-col gap-6 p-6">
 
       <SpendingInsight insight={insight}/>
-
-  {/* ⭐ AI Insights Widget (placeholder for later) */}
-  
-
-  {/* ⭐ Summary Cards */}
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-    {/* Total Spent */}
-    <MonthlyTotalSpent expenseList={expenseLastMonth}/>
-
-    {/* Transactions Count */}
-    <TotalTransactions expenseList={expenseList}/>
     
-    {/* Highest Expense */}
-    <HighestExpese expenseList={expenseList}/>
-  </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <MonthlyTotalSpent expenseList={list_of_expense}/>
+        <TotalTransactions expenseList={list_of_expense}/>
+        <HighestExpese expenseList={list_of_expense}/>
+      </div>
 
   {/* ⭐ Charts Row */}
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
     {/* Category Breakdown Chart */}
-    <CategoryBreakdown expenseList={expenseList}/>
+    <CategoryBreakdown expenseList={list_of_expense}/>
+    <SpendingTrend expenseList={list_of_expense}/>
 
-    <div className="border rounded-lg p-4 shadow-sm bg-white h-[350px]">
-      <h3 className="text-lg font-semibold mb-2">Spending Trend (Last 30 Days)</h3>
-      <div className="flex items-center justify-center h-full text-neutral-400">
-        (Line chart goes here)
-      </div>
-    </div>
+    
 
   </div>
-
-  <div className="border rounded-lg p-4 shadow-sm bg-white">
-    <h3 className="text-lg font-semibold mb-3">Recent Expenses</h3>
-
-    <div className="border rounded-md overflow-hidden">
-      <table className="w-full text-sm">
-        <thead className="bg-neutral-100">
-          <tr>
-            <th className="text-left p-2 font-medium">Date</th>
-            <th className="text-left p-2 font-medium">Title</th>
-            <th className="text-left p-2 font-medium">Category</th>
-            <th className="text-right p-2 font-medium">Amount</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr className="border-t">
-            <td className="p-2 text-neutral-400">—</td>
-            <td className="p-2 text-neutral-400">No recent expenses</td>
-            <td className="p-2 text-neutral-400">—</td>
-            <td className="p-2 text-right text-neutral-400">—</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
 </div>
 
   )
