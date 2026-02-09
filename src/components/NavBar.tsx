@@ -28,6 +28,12 @@ const NavBar = () => {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-4">
+          <Link 
+            href="/dashboard"
+            className="text-sm text-gray-600 hover:text-black transition"
+          >
+            Dashboard
+          </Link>
 
           <Link 
             href="/expenses"

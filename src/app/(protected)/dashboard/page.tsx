@@ -181,7 +181,7 @@ const DashboardPage = async () => {
 
 ];
 
-  // AI
+  // TODO: AI insight 
   // const insight = await generateInsight(list_of_expense);
   const insight = {
   summary: 'The overall spending shows a balanced approach with notable expenses in groceries and clothing. Leisure activities also contribute significantly to the total spending.',
@@ -194,31 +194,20 @@ const DashboardPage = async () => {
   ]
 }
 
-
-  
-
   return (
     <div className="flex flex-col gap-6 p-6">
-
       <SpendingInsight insight={insight}/>
-    
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <MonthlyTotalSpent expenseList={list_of_expense}/>
         <TotalTransactions expenseList={list_of_expense}/>
         <HighestExpese expenseList={list_of_expense}/>
       </div>
 
-  {/* ⭐ Charts Row */}
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-    {/* Category Breakdown Chart */}
-    <CategoryBreakdown expenseList={list_of_expense}/>
-    <SpendingTrend expenseList={list_of_expense}/>
-
-    
-
-  </div>
-</div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <CategoryBreakdown expenseList={list_of_expense}/>
+        <SpendingTrend expenseList={list_of_expense}/>
+      </div>
+    </div>
 
   )
 }
