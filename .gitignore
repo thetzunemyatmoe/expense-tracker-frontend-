@@ -46,3 +46,4 @@ next-env.d.ts
 
 # other files
 src/app/(protected)/dashboard/note.txt
+screenshot

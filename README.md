@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Powered Expense Tracker — Frontend
 
-## Getting Started
+## My Motivation
 
-First, run the development server:
+Ever since I became a university student living thousands of miles away from my family, I’ve gained a much deeper understanding of the importance of money and how difficult it can be to manage it well. I’ve seen firsthand how having proper control over finances can significantly impact one’s quality of life. Growing up, I noticed a daily habit of my mum: she carefully logged every expense she made and tracked both income and spending. This was all done physically in a notebook. While it was effective, I also saw how vulnerable this approach was—easy to lose, hard to analyse, and limited to manual insights. As I started managing my own finances independently, I wanted a system that not only tracked expenses but also helped me understand my spending habits and improve them over time.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Hence, I decided to start this project to solve that need. It allows me to apply and strengthen my skills in full-stack development—especially Next.js, which I had recently learned and to dive deeper into building AI- and LLM-powered applications that solve real, personal problems.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In short, this project sits at the intersection of personal experience, practical problem-solving, and my long-term goal of building intelligent, impactful software.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+Framework: Next.js (App Router)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Language: TypeScript
 
-## Learn More
+UI: Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+Charts: Recharts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+AI : Open AI (Model : gpt-4o-mini)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Features
+- Expense Dashboard
+  - Visual breakdown of spending by category
+  - Interactive charts and summaries
+  - AI-generated spending analysis and suggestions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Expense Management
+  - Add, edit, and delete expenses
+
+- Secure API Communication
+  - Communicates with backend via REST APIs
+
+- Dark Mode
+- JWT based Authentication & user accounts
+
+## Backend Repository
+https://github.com/thetzunemyatmoe/expense-tracker
