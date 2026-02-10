@@ -36,5 +36,19 @@ AI : Open AI (Model : gpt-4o-mini)
 - Dark Mode
 - JWT based Authentication & user accounts
 
+## 📸 Screenshots
+
+### Dashboard Overview
+![Dashboard Overview](public/screenshots/dashboard.png)
+
+### Expense Management
+![Expense Management](public/screenshots/expense.png)
+
+### Login Page
+![Login Page](public/screenshots/login.png)
+
+### Registration Page
+![Registration Page](public/screenshots/register.png)
+
 ## Backend Repository
 https://github.com/thetzunemyatmoe/expense-tracker
